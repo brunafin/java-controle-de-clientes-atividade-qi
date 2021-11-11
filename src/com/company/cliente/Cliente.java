@@ -1,13 +1,14 @@
-package com.company;
+package com.company.cliente;
+
+import com.company.contabancaria.ContaBancaria;
 
 import java.util.Date;
-import java.util.Scanner;
 
 public class Cliente {
-    String tipo;
-    Date dataEntrada;
-    double limite;
-    int tipoAumentoLimte;
+    protected String tipo;
+    protected Date dataEntrada;
+    protected double limite;
+    protected int tipoAumentoLimte;
     /*
     tipoAumentoLimite = 1 -> Reais
     tipoAumentoLimite = 2 -> %

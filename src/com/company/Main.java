@@ -1,6 +1,7 @@
 package com.company;
 
-import java.text.SimpleDateFormat;
+import com.company.cliente.Cliente;
+
 import java.util.Date;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ public class Main {
 
     public static void inicializar() {
         Scanner ler = new Scanner(System.in);
-        Date hoje = new Date();
+        Date dataEntrada = new Date();
         Cliente cliente = new Cliente();
 
         System.out.println("_______________________________________");
@@ -26,7 +27,7 @@ public class Main {
             case "A":
             case "B":
             case "C":
-                cliente.criarCliente(escolha, hoje);
+                cliente.criarCliente(escolha, dataEntrada);
                 break;
             default:
                 System.out.println("Digite um tipo válido");

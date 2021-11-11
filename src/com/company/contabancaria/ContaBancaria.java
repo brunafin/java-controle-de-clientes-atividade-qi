@@ -1,5 +1,7 @@
-package com.company;
+package com.company.contabancaria;
 
+
+import com.company.cliente.Cliente;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -135,7 +137,7 @@ public class ContaBancaria extends Cliente {
         }
 
     }
-
+    // adicionar aumento de limite do cliente tipo B
     public void verificaAumentoLimite() {
         if (accCompras >= 5000) {
             setLimite(limite + 500);
