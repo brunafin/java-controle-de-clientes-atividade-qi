@@ -2,11 +2,9 @@ package com.company;
 
 import com.company.cliente.Cliente;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-
 
     public static void inicializar() {
         Scanner ler = new Scanner(System.in);

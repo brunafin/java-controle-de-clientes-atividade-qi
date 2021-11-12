@@ -2,8 +2,6 @@ package com.company.cliente;
 
 import com.company.contabancaria.ContaBancaria;
 
-import java.util.Date;
-
 public class Cliente {
     protected String tipo;
     protected double limite;
@@ -14,13 +12,10 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String tipo, double limite, int aumentoLimite, double bonus, int beneficioBonus) {
-    }
-
     public void criarCliente(String tipo) {
         setTipo(tipo);
-        System.out.println(toString());
-        ContaBancaria novaConta = new ContaBancaria(tipo);
+        System.out.println(this);
+        ContaBancaria novaConta = new ContaBancaria();
         switch (tipo) {
             case "A":
                 setLimite(10000);

@@ -1,9 +1,7 @@
 package com.company.contabancaria;
 
-
 import com.company.cliente.Cliente;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class ContaBancaria extends Cliente {
@@ -13,34 +11,22 @@ public class ContaBancaria extends Cliente {
     private double accPagamentos;
     private int direitoBonus;
 
+    Scanner ler = new Scanner(System.in);
+
     public ContaBancaria() {
     }
 
-    public ContaBancaria(String tipo, double limite, int aumentoLimite, double bonus, int beneficioBonus) {
-        super(tipo, limite, aumentoLimite, bonus, beneficioBonus);
-        saldoDevedor = saldoDevedor;
-        accCompras = accCompras;
-        accPagamentos = accPagamentos;
-        direitoBonus = direitoBonus;
-    }
-
-    Scanner ler = new Scanner(System.in);
-
-    public ContaBancaria(String tipo) {
-    }
-
-    public void criarContaBancaria(String tipo, double limite, int tipoAumentoLimite, double bonus, int beneficioBonus) {
+    public void criarContaBancaria(String tipo, double limite, int aumentoLimite, double bonus, int beneficioBonus) {
         switch (tipo) {
             case "A":
             case "B":
             case "C":
                 setTipo(tipo);
                 setLimite(limite);
-                setAumentoLimte(tipoAumentoLimite);
+                setAumentoLimte(aumentoLimite);
                 setBonus(bonus);
                 setBeneficioBonus(beneficioBonus);
-                System.out.println("chegueis" + bonus);
-                System.out.println(toString());
+                System.out.println(this);
                 acoesDaConta();
                 break;
         }
@@ -89,7 +75,11 @@ public class ContaBancaria extends Cliente {
                             System.out.println("Saldo devedor: " + saldoDevedor);
                             System.out.println("Quanto você deseja pagar?");
                             int valorAPagar = ler.nextInt();
-                            pagar(valorAPagar);
+                            if (valorAPagar <= saldoDevedor) {
+                                pagar(valorAPagar);
+                            }else{
+                                System.out.println("Você não pode pagar um valor acima do saldo devedor");
+                            }
                         } else {
                             System.out.println("----------------");
                             System.out.println("Não é possível realizar o pagamento, verifique seu limite ou se há valores em aberto");
@@ -98,7 +88,7 @@ public class ContaBancaria extends Cliente {
                         }
                         break;
                     case 3:
-                        System.out.println(toString());
+                        System.out.println(this);
                         acoesDaConta();
                     default:
                         System.out.println("Digite uma opção válida");
@@ -154,14 +144,14 @@ public class ContaBancaria extends Cliente {
                 setLimite(limite - valorComDesconto);
                 setAccCompras(accCompras + valorComDesconto);
                 verificaAumentoLimite();
-                System.out.println(toString());
+                System.out.println(this);
             } else {
                 System.out.println("Comprando... " + valor);
                 setSaldoDevedor(saldoDevedor + valor);
                 setLimite(limite - valor);
                 setAccCompras(accCompras + valor);
                 verificaAumentoLimite();
-                System.out.println(toString());
+                System.out.println(this);
             }
             return;
         }
@@ -182,7 +172,7 @@ public class ContaBancaria extends Cliente {
         setLimite(limite + valorAPagar);
         setAccPagamentos(accPagamentos + valorAPagar);
         verificaBonus();
-        System.out.println(toString());
+        System.out.println(this);
         acoesDaConta();
     }
 
