@@ -3,7 +3,7 @@ package com.company.cliente;
 import com.company.contabancaria.ContaBancaria;
 
 public class Cliente {
-    protected String tipo;
+    protected char tipo;
     protected double limite;
     protected int aumentoLimte;
     protected double bonus;
@@ -12,24 +12,24 @@ public class Cliente {
     public Cliente() {
     }
 
-    public void criarCliente(String tipo) {
+    public void criarCliente(char tipo) {
         setTipo(tipo);
         System.out.println(this);
         ContaBancaria novaConta = new ContaBancaria();
         switch (tipo) {
-            case "A":
+            case 'A':
                 setLimite(10000);
                 setAumentoLimte(500);
                 setBonus(0.10);
                 setBeneficioBonus(2);
                 novaConta.criarContaBancaria(tipo, limite, aumentoLimte, bonus, beneficioBonus);
-            case "B":
+            case 'B':
                 setLimite(5000);
                 setAumentoLimte(0);
                 setBonus(0.05);
                 setBeneficioBonus(1);
                 novaConta.criarContaBancaria(tipo, limite, aumentoLimte, bonus, beneficioBonus);
-            case "C":
+            case 'C':
                 setLimite(1000);
                 setAumentoLimte(0);
                 setBonus(0);
@@ -39,7 +39,7 @@ public class Cliente {
         }
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(char tipo) {
         this.tipo = tipo;
     }
 

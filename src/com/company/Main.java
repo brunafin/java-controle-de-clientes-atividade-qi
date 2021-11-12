@@ -19,11 +19,11 @@ public class Main {
         System.out.println("C - Tipo 'C' - saldo inicial: R$ 1.000,00");
 
         System.out.println("\nEscolha uma opção do menu acima: ");
-        String tipo = ler.nextLine();
+        char tipo = ler.next().charAt(0);
         switch (tipo) {
-            case "A":
-            case "B":
-            case "C":
+            case 'A':
+            case 'B':
+            case 'C':
                 cliente.criarCliente(tipo);
                 break;
             default:

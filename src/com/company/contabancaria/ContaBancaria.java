@@ -16,11 +16,11 @@ public class ContaBancaria extends Cliente {
     public ContaBancaria() {
     }
 
-    public void criarContaBancaria(String tipo, double limite, int aumentoLimite, double bonus, int beneficioBonus) {
+    public void criarContaBancaria(char tipo, double limite, int aumentoLimite, double bonus, int beneficioBonus) {
         switch (tipo) {
-            case "A":
-            case "B":
-            case "C":
+            case 'A':
+            case 'B':
+            case 'C':
                 setTipo(tipo);
                 setLimite(limite);
                 setAumentoLimte(aumentoLimite);
@@ -212,7 +212,7 @@ public class ContaBancaria extends Cliente {
                 "\nCliente: " + tipo +
                 "\nLimite: " + limite +
                 "\nSaldo devedor: " + saldoDevedor +
-                "\n---Regras de bonus--- " +
+                "\n\n---Regras de bonus--- " +
                 "\nTipo de bonus: " + bonus * 100 + "% de desconto na(s) próxima(s) " + beneficioBonus + " compra(s) a cada R$ 2.000,00 pagos" +
                 "\nTotal de pagamentos realizados para possível resgate de bonus: " + accPagamentos +
                 "\nNúmero de compras com direito ao bonus: " + direitoBonus +
