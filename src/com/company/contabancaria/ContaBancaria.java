@@ -210,11 +210,12 @@ public class ContaBancaria extends Cliente {
         return "____________________________________________________________________________________________________\n" +
                 "Detalhes da Conta Bancaria \n" +
                 "\nCliente: " + tipo +
-                "\nlimite: " + limite +
-                "\nsaldo devedor: " + saldoDevedor +
-                "\ntipo de bonus: " + bonus * 100 + "% de desconto nas próximas " + beneficioBonus + " compras a cada R$ 2.000,00 pagos" +
-                "\ntotal de pagamentos realizados: " + accPagamentos +
-                "\nbonus a resgatar: " + direitoBonus +
+                "\nLimite: " + limite +
+                "\nSaldo devedor: " + saldoDevedor +
+                "\n---Regras de bonus--- " +
+                "\nTipo de bonus: " + bonus * 100 + "% de desconto na(s) próxima(s) " + beneficioBonus + " compra(s) a cada R$ 2.000,00 pagos" +
+                "\nTotal de pagamentos realizados para possível resgate de bonus: " + accPagamentos +
+                "\nNúmero de compras com direito ao bonus: " + direitoBonus +
                 "\n____________________________________________________________________________________________________";
     }
 }
