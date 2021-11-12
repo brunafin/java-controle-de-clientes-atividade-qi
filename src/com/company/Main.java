@@ -10,7 +10,6 @@ public class Main {
 
     public static void inicializar() {
         Scanner ler = new Scanner(System.in);
-        Date dataEntrada = new Date();
         Cliente cliente = new Cliente();
 
         System.out.println("_______________________________________");
@@ -22,12 +21,12 @@ public class Main {
         System.out.println("C - Tipo 'C' - saldo inicial: R$ 1.000,00");
 
         System.out.println("\nEscolha uma opção do menu acima: ");
-        String escolha = ler.nextLine();
-        switch (escolha) {
+        String tipo = ler.nextLine();
+        switch (tipo) {
             case "A":
             case "B":
             case "C":
-                cliente.criarCliente(escolha, dataEntrada);
+                cliente.criarCliente(tipo);
                 break;
             default:
                 System.out.println("Digite um tipo válido");

@@ -8,54 +8,38 @@ import java.util.Scanner;
 
 public class ContaBancaria extends Cliente {
 
-    double saldoDevedor;
-    double bonus;
-    double accCompras;
-    double accPagamentos;
-    int beneficioBonus = 0;
-    int direitoBonus;
+    private double saldoDevedor;
+    private double accCompras;
+    private double accPagamentos;
+    private int direitoBonus;
 
-    public ContaBancaria(){
+    public ContaBancaria() {
     }
 
-    public ContaBancaria(String tipo, double limite, int tipoAumentoLimite) {
-        super(tipo, limite, tipoAumentoLimite);
+    public ContaBancaria(String tipo, double limite, int aumentoLimite, double bonus, int beneficioBonus) {
+        super(tipo, limite, aumentoLimite, bonus, beneficioBonus);
         saldoDevedor = saldoDevedor;
-        bonus = bonus; // percentual de desconto
         accCompras = accCompras;
         accPagamentos = accPagamentos;
-        beneficioBonus = beneficioBonus; // quantidade de compras
-        direitoBonus = direitoBonus; // cada vez que bater 2000 pagos precisa aumentar a quantidade que tem em beneficioBonus
+        direitoBonus = direitoBonus;
     }
 
     Scanner ler = new Scanner(System.in);
 
-    public ContaBancaria(String tipo, Date dataEntrada) {
-        this.tipo = tipo;
-        this.dataEntrada = dataEntrada;
+    public ContaBancaria(String tipo) {
     }
 
-    public void criarContaBancaria(String tipo, double limite, int tipoAumentoLimite) {
+    public void criarContaBancaria(String tipo, double limite, int tipoAumentoLimite, double bonus, int beneficioBonus) {
         switch (tipo) {
             case "A":
-                setLimite(limite);
-                setTipoAumentoLimte(tipoAumentoLimite);
-                setBonus(0.10);
-                setBeneficioBonus(2);
-                System.out.println(toString());
-                acoesDaConta();
-                break;
             case "B":
-                setLimite(limite);
-                setTipoAumentoLimte(tipoAumentoLimite);
-                setBonus(0.05);
-                setBeneficioBonus(1);
-                System.out.println(toString());
-                acoesDaConta();
-                break;
             case "C":
+                setTipo(tipo);
                 setLimite(limite);
-                setTipoAumentoLimte(tipoAumentoLimite);
+                setAumentoLimte(tipoAumentoLimite);
+                setBonus(bonus);
+                setBeneficioBonus(beneficioBonus);
+                System.out.println("chegueis" + bonus);
                 System.out.println(toString());
                 acoesDaConta();
                 break;
@@ -137,28 +121,32 @@ public class ContaBancaria extends Cliente {
         }
 
     }
-    // adicionar aumento de limite do cliente tipo B
+
     public void verificaAumentoLimite() {
-        if (accCompras >= 5000) {
-            setLimite(limite + 500);
-            setAccCompras(accCompras - 5000);
+        if (aumentoLimte > 0) {
+            if (accCompras >= 5000) {
+                setLimite(limite + 500);
+                setAccCompras(accCompras - 5000);
+            }
         }
     }
 
-    public void verificaBonus(){
-        if(accPagamentos >= 2000){
-            setDireitoBonus(direitoBonus + beneficioBonus);
-            setAccPagamentos(accPagamentos - 2000);
-        }else if(accPagamentos < 2000){
-            setDireitoBonus(0);
+    public void verificaBonus() {
+        if (bonus > 0) {
+            if (accPagamentos >= 2000) {
+                setDireitoBonus(direitoBonus + beneficioBonus);
+                setAccPagamentos(accPagamentos - 2000);
+            } else if (accPagamentos < 2000) {
+                setDireitoBonus(0);
+            }
         }
     }
 
     public void comprar(double valor) {
         boolean aprovado = verificaSaldo(valor);
         if (aprovado) {
-            if(direitoBonus > 0){
-                System.out.println("Você tem direito a "+ bonus * 100 +"% de desconto nesta compra");
+            if (direitoBonus > 0) {
+                System.out.println("Você tem direito a " + bonus * 100 + "% de desconto nesta compra");
                 setDireitoBonus(direitoBonus - 1);
                 double valorComDesconto = valor - (valor * bonus);
                 System.out.println("Valor com desconto: " + valorComDesconto);
@@ -167,7 +155,7 @@ public class ContaBancaria extends Cliente {
                 setAccCompras(accCompras + valorComDesconto);
                 verificaAumentoLimite();
                 System.out.println(toString());
-            }else{
+            } else {
                 System.out.println("Comprando... " + valor);
                 setSaldoDevedor(saldoDevedor + valor);
                 setLimite(limite - valor);
@@ -231,7 +219,7 @@ public class ContaBancaria extends Cliente {
     public String toString() {
         return "____________________________________________________________________________________________________\n" +
                 "Detalhes da Conta Bancaria \n" +
-                "\nCliente: "+ tipo +
+                "\nCliente: " + tipo +
                 "\nlimite: " + limite +
                 "\nsaldo devedor: " + saldoDevedor +
                 "\ntipo de bonus: " + bonus * 100 + "% de desconto nas próximas " + beneficioBonus + " compras a cada R$ 2.000,00 pagos" +

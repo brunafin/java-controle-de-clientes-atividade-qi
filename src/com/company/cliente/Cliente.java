@@ -6,39 +6,40 @@ import java.util.Date;
 
 public class Cliente {
     protected String tipo;
-    protected Date dataEntrada;
     protected double limite;
-    protected int tipoAumentoLimte;
-    /*
-    tipoAumentoLimite = 1 -> Reais
-    tipoAumentoLimite = 2 -> %
-    tipoAumentoLimite = 0 -> Não tem direito
-    */
+    protected int aumentoLimte;
+    protected double bonus;
+    protected int beneficioBonus;
 
     public Cliente() {
     }
 
-    public Cliente(String tipo, double limite, int tipoAumentoLimite) {
+    public Cliente(String tipo, double limite, int aumentoLimite, double bonus, int beneficioBonus) {
     }
 
-    public void criarCliente(String tipo, Date hoje) {
+    public void criarCliente(String tipo) {
         setTipo(tipo);
-        setDataEntrada(hoje);
         System.out.println(toString());
-        ContaBancaria novaConta = new ContaBancaria(tipo, dataEntrada);
+        ContaBancaria novaConta = new ContaBancaria(tipo);
         switch (tipo) {
             case "A":
                 setLimite(10000);
-                setTipoAumentoLimte(1);
-                novaConta.criarContaBancaria(tipo, limite, tipoAumentoLimte);
+                setAumentoLimte(500);
+                setBonus(0.10);
+                setBeneficioBonus(2);
+                novaConta.criarContaBancaria(tipo, limite, aumentoLimte, bonus, beneficioBonus);
             case "B":
                 setLimite(5000);
-                setTipoAumentoLimte(2);
-                novaConta.criarContaBancaria(tipo, limite, tipoAumentoLimte);
+                setAumentoLimte(0);
+                setBonus(0.05);
+                setBeneficioBonus(1);
+                novaConta.criarContaBancaria(tipo, limite, aumentoLimte, bonus, beneficioBonus);
             case "C":
                 setLimite(1000);
-                setTipoAumentoLimte(0);
-                novaConta.criarContaBancaria(tipo, limite, tipoAumentoLimte);
+                setAumentoLimte(0);
+                setBonus(0);
+                setBeneficioBonus(0);
+                novaConta.criarContaBancaria(tipo, limite, aumentoLimte, bonus, beneficioBonus);
                 break;
         }
     }
@@ -47,16 +48,20 @@ public class Cliente {
         this.tipo = tipo;
     }
 
-    public void setLimite(int limite) {
+    public void setLimite(double limite) {
         this.limite = limite;
     }
 
-    public void setDataEntrada(Date dataEntrada) {
-        this.dataEntrada = dataEntrada;
+    public void setAumentoLimte(int aumentoLimte) {
+        this.aumentoLimte = aumentoLimte;
     }
 
-    public void setTipoAumentoLimte(int tipoAumentoLimte) {
-        this.tipoAumentoLimte = tipoAumentoLimte;
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
+
+    public void setBeneficioBonus(int beneficioBonus) {
+        this.beneficioBonus = beneficioBonus;
     }
 
     @Override
@@ -64,7 +69,6 @@ public class Cliente {
         return "____________________________________________________________________________________________________\n" +
                 "Cliente criado com sucesso! \n" +
                 "tipo: " + tipo + "\n" +
-                "data de entrada: " + dataEntrada + "\n" +
                 "____________________________________________________________________________________________________";
     }
 }
