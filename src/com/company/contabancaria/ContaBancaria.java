@@ -4,8 +4,10 @@ import com.company.cliente.Cliente;
 
 import java.util.Scanner;
 
-public class ContaBancaria extends Cliente {
+// conceito de herança aplicado onde ContaBancária é filha da classe Cliente
+// ContaBancária herda os atributos: tipo, limite, aumentoLimite, bonus e beneficioBonus da classe Cliente
 
+public class ContaBancaria extends Cliente {
     private double saldoDevedor;
     private double accCompras;
     private double accPagamentos;
@@ -13,6 +15,7 @@ public class ContaBancaria extends Cliente {
 
     Scanner ler = new Scanner(System.in);
 
+    // construtor
     public ContaBancaria() {
     }
 
@@ -27,12 +30,13 @@ public class ContaBancaria extends Cliente {
                 setBonus(bonus);
                 setBeneficioBonus(beneficioBonus);
                 System.out.println(this);
-                acoesDaConta();
+                exibirAcoesDaConta();
                 break;
         }
     }
 
-    public void acoesDaConta() {
+    // ações da conta tem três opções: comprar, pagar e ver detalhes da conta
+    public void exibirAcoesDaConta() {
         System.out.println("\n Escolha uma ação");
         System.out.println("1 - Comprar");
         System.out.println("2 - Pagar");
@@ -63,7 +67,7 @@ public class ContaBancaria extends Cliente {
                                 comprar(valor);
                                 break;
                             case 4:
-                                acoesDaConta();
+                                exibirAcoesDaConta();
                                 break;
                             default:
                                 System.out.println("Item não encontrado, escolha uma opção válida");
@@ -84,12 +88,12 @@ public class ContaBancaria extends Cliente {
                             System.out.println("----------------");
                             System.out.println("Não é possível realizar o pagamento, verifique seu limite ou se há valores em aberto");
                             System.out.println("----------------");
-                            acoesDaConta();
+                            exibirAcoesDaConta();
                         }
                         break;
                     case 3:
                         System.out.println(this);
-                        acoesDaConta();
+                        exibirAcoesDaConta();
                     default:
                         System.out.println("Digite uma opção válida");
                         break;
@@ -99,7 +103,8 @@ public class ContaBancaria extends Cliente {
 
     }
 
-    public boolean verificaSaldo(double valorDaCompra) {
+    // verifica se o limite é maior que o valor da compra
+    public boolean verificarSaldo(double valorDaCompra) {
         System.out.println("Verificando limite... ");
         if (valorDaCompra > limite) {
             System.out.println("-----ATENÇÃO----");
@@ -112,7 +117,8 @@ public class ContaBancaria extends Cliente {
 
     }
 
-    public void verificaAumentoLimite() {
+    // verifica se atingiu a condição para aumentar o limite
+    public void verificarAumentoLimite() {
         if (aumentoLimte > 0) {
             if (accCompras >= 5000) {
                 setLimite(limite + 500);
@@ -121,7 +127,8 @@ public class ContaBancaria extends Cliente {
         }
     }
 
-    public void verificaBonus() {
+    // verifica se tem direito ao bonus
+    public void verificarBonus() {
         if (bonus > 0) {
             if (accPagamentos >= 2000) {
                 setDireitoBonus(direitoBonus + beneficioBonus);
@@ -132,8 +139,9 @@ public class ContaBancaria extends Cliente {
         }
     }
 
+    // permite usuário a fazer a compra
     public void comprar(double valor) {
-        boolean aprovado = verificaSaldo(valor);
+        boolean aprovado = verificarSaldo(valor);
         if (aprovado) {
             if (direitoBonus > 0) {
                 System.out.println("Você tem direito a " + bonus * 100 + "% de desconto nesta compra");
@@ -143,22 +151,23 @@ public class ContaBancaria extends Cliente {
                 setSaldoDevedor(saldoDevedor + valorComDesconto);
                 setLimite(limite - valorComDesconto);
                 setAccCompras(accCompras + valorComDesconto);
-                verificaAumentoLimite();
+                verificarAumentoLimite();
                 System.out.println(this);
             } else {
                 System.out.println("Comprando... " + valor);
                 setSaldoDevedor(saldoDevedor + valor);
                 setLimite(limite - valor);
                 setAccCompras(accCompras + valor);
-                verificaAumentoLimite();
+                verificarAumentoLimite();
                 System.out.println(this);
             }
             return;
         }
-        acoesDaConta();
+        exibirAcoesDaConta();
 
     }
 
+    // permite o usuário a pagar a conta digitando o valor que deseja pagar
     public void pagar(int valorAPagar) {
         System.out.println("Processando pagamento..." + valorAPagar);
         if (limite < valorAPagar) {
@@ -171,9 +180,9 @@ public class ContaBancaria extends Cliente {
         setSaldoDevedor(saldoDevedor - valorAPagar);
         setLimite(limite + valorAPagar);
         setAccPagamentos(accPagamentos + valorAPagar);
-        verificaBonus();
+        verificarBonus();
         System.out.println(this);
-        acoesDaConta();
+        exibirAcoesDaConta();
     }
 
     public void setLimite(double limite) {
