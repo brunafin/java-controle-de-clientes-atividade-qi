@@ -51,6 +51,7 @@ public class Cliente {
                 break;
         }
     }
+
     // sets
     public void setTipo(char tipo) {
         this.tipo = tipo;

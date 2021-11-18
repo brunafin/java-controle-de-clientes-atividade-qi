@@ -4,8 +4,8 @@ import com.company.cliente.Cliente;
 
 import java.util.Scanner;
 
-// conceito de herança aplicado onde ContaBancária é filha da classe Cliente
-// ContaBancária herda os atributos: tipo, limite, aumentoLimite, bonus e beneficioBonus da classe Cliente
+    // conceito de herança aplicado onde ContaBancária é filha da classe Cliente
+    // ContaBancária herda os atributos: tipo, limite, aumentoLimite, bonus e beneficioBonus da classe Cliente
 
 public class ContaBancaria extends Cliente {
     private double saldoDevedor;
@@ -81,7 +81,7 @@ public class ContaBancaria extends Cliente {
                             int valorAPagar = ler.nextInt();
                             if (valorAPagar <= saldoDevedor) {
                                 pagar(valorAPagar);
-                            }else{
+                            } else {
                                 System.out.println("Você não pode pagar um valor acima do saldo devedor");
                             }
                         } else {
